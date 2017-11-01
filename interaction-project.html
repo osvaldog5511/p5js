@@ -1,0 +1,56 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+    <title>p5js Template</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.3/p5.js"></script>
+
+    <script>
+        var scale; //I made a variable called scale
+
+        function setup() {
+            createCanvas(windowWidth, windowHeight); //I put windowWidth or windowHeight so it can be a variable to help me with the width
+            scale = 2 //scale umber 2 so it can increase better
+        }
+
+        function draw() {
+            strokeWeight(2) //make it thicker 
+            fill(mouseX, mouseY, random(255)) //this makes a lot of different colors
+            ellipse(mouseX, mouseY, scale * 20, scale * 20) //this makes he circles duplicate like a bunch of cookies
+            ellipse(mouseX, mouseY, scale * 10, scale * 10)
+            rect(mouseY, mouseX, scale * 20, scale * 20) //this makes another shape but in the oppisite of the circle
+            rect(mouseY, mouseX, scale * 10, scale * 10)
+
+        }
+
+        function mouseDragged() {//new function about mouseDragged
+            ellipse(width / 4, height / 4, mouseX, mouseY)//This makes a new shape helping me with the width and height
+            ellipse(width / 1.8, height / 1.8, mouseX, mouseY)
+            scale += 0.01//this makes the shapes dilate when you drag it
+        }
+
+        function mouseMoved() {//new function about mouseMoved
+
+            scale += 0.01//when you move the mouse the shapes dilates bigger
+        }
+
+        function mousePressed() {// New function where when you press the mouse this happens
+            background(random(255), random(255), random(255))//the background changes color
+        }
+    </script>
+</head>
+
+<body>
+    <div id="code" class="container-fluid">
+        <script src="https://gist-it.appspot.com/github/osvaldog5511/p5js/blob/gh-pages/interaction-project.html?footer=0"></script>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script>
+        $(window).bind("load", function() {
+            $('#code').before($('#defaultCanvas0').remove());
+        });
+    </script>
+</body>
+
+</html>
