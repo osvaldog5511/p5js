@@ -1,0 +1,86 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+    <title>p5js Template</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.3/p5.js"></script>
+
+    <script>
+        var centerX;
+        var centerY;
+
+        function setup() {
+            createCanvas(500, 500);
+            centerX = width / 2 // center of width
+            centerY = height - 120; // center of height
+            redBullet = 50; // the red bullet
+        }
+
+        function draw() {
+            //background
+            clear() // clear any anoying weird bugs
+            background(189, 195, 199) // background turns green color
+            fill(11, 83, 69) //fill the rectangle with green color
+            rectMode(CORNER)
+            rect(0, height - 80, width, 80) // makes the width and height together
+            rect(0, 0, 2000, 230)
+            
+            //red bullet
+            fill(255,0,0) // color red
+            ellipse( redBullet, 380, 70, 20)// red bullet
+            redBullet = redBullet+5 // makes the red bullet in the center 
+
+            //character
+            rectMode(CENTER)
+            fill(0)//wings color
+            ellipse(centerX + 2, centerY - 10, 70, 20)//wing
+            fill(17, 122, 101)//body color
+            rect(centerX, centerY, 30, 45)//body 
+            fill(170, 150, 80)//head color
+            ellipse(centerX, centerY - 37, 30, 30)//head
+            fill(255)//color of eyes
+            ellipse(centerX - 6, centerY - 37, 8, 8)//eye 1
+            ellipse(centerX + 6, centerY - 37, 8, 8)//eye 2
+            fill(0)//color of pupil
+            ellipse(centerX - 6, centerY - 37, 4, 4)//pupil 1
+            ellipse(centerX + 6, centerY - 37, 4, 4)//pupil 2
+            line(centerX - 10, centerY + 23, centerX - 10, centerY + 40)//leg
+            line(centerX + 10, centerY + 23, centerX + 10, centerY + 40)//leg
+            line(400, 450, 400, 450)//nose
+            if (centerY < height - 120) {
+                centerY++//centerY increases
+            }
+        }
+
+        function mousePressed() {
+            if (centerY == height - 120) {
+                centerY = centerY - 86.5//jump
+            }
+        }
+
+        function keyPressed() {
+            clear()
+            if (keyCode === RIGHT_ARROW) {//go to the right
+                centerX += 10
+            }
+            if (keyCode === LEFT_ARROW) {//go to the left
+                centerX -= 10
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div id="code" class="container-fluid">
+        <script src="https://gist-it.appspot.com/github/osvaldog5511/p5js/blob/master/conditional-project.html?footer=0"></script>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script>
+        $(window).bind("load", function() {
+            $('#code').before($('#defaultCanvas0').remove());
+        });
+    </script>
+</body>
+
+</html>
