@@ -1,0 +1,160 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+    <title>p5js Template</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.3/p5.js"></script>
+
+    <script>
+        var squareX;
+        var squareY = 200;
+        var score = 0;
+        var ballX = 200
+        var xSpeed = 3;//speed of square
+        var w = 10//width of square
+        var h = 10//height of square
+        var button = false//button will be set to false
+        var ballY;
+        var characters = []//array for the character square
+
+        function setup() {
+            createCanvas(500, 400);
+            squareX = 80;
+        }
+
+        function draw() {
+
+            console.log("mouseX: " + mouseX);//find the x axis on console
+            console.log("mouseY: " + mouseY)//find the y value on console
+
+            maze()//make the functions run
+            drawSquare();
+            obstacle1()
+            obstacle2()
+            check();
+            for (var i = 0; i < characters.length; i++) {//for loop for the character square
+                characters[i].move();
+                characters[i].display();
+                characters[i].avoidObstacle();
+                characters[i].loseLife();
+                characters[i].addScore();
+            }
+
+        }
+
+        function maze() {//making the maze
+            background(0, 0, 255)
+            fill("White")
+            rect(155, 130, 200, 100) //middle rectangle
+            textSize(50)
+            noStroke()
+            rect(130, 245, 50, 25) //left bottom rectangle
+            rect(155, 230, 25, 15) //left bottom small rectangle
+            rect(330, 90, 50, 25)
+            rect(330, 115, 25, 15)
+            fill("green")
+            rect(60, 130, 70, 140) //left rectangle
+            fill("yellow")
+            rect(380, 90, 70, 140) //right rectangle
+
+
+            textSize(30);
+            text("Deaths: " + score, 20, 40);
+        }
+
+        function obstacle1() {//make the obsticle 1
+            textSize(10);
+            fill("blue")
+            ellipse(ballX, 195, 10, 10); //3rd circle
+            ellipse(ballX, 135, 10, 10); //up circle
+            if (ballX < 155 || ballX > 355) {
+                xSpeed *= -1
+            }
+            ballX += xSpeed;
+        }
+
+        function obstacle2() {//make the obsticle 2
+            fill("blue")
+            ellipse(ballX, 225, 10, 10); //down circle
+            ellipse(ballX, 165, 10, 10); //2nd circle
+            if (ballX < 355 || ballX > 155) {
+                xSpeed *= 1
+            }
+            //ballX += xSpeed;
+        }
+
+        function drawSquare() {// the square 
+
+            fill("red")
+            if (button) {
+                fill("black");
+            }
+            rect(squareX, squareY, w, h)
+
+        }
+
+        function keyPressed() {//key preesed the arrow keys and you move the square
+            if (keyCode == RIGHT_ARROW) {
+                squareX += 10
+            }
+            else if (keyCode == LEFT_ARROW) {
+                squareX -= 10
+            }
+            if (keyCode == UP_ARROW) {
+                squareY -= 10
+            }
+            else if (keyCode == DOWN_ARROW) {
+                squareY += 10
+            }
+            if (key == 'a' || key == 'A') {
+                var newColor = prompt("What color")
+                colArray.push(newColor)
+            }
+        }
+
+        function check() {//when you get to the yellow you win the game
+            console.log("test1")
+            if (squareX >= 380) {
+                console.log("test2")
+                background(0)
+                fill(255)
+                textAlign(CENTER);
+                text("YOU WIN", width / 2, height / 2);
+                noLoop();
+                //console.log("HERE")
+            }
+            console.log("test3")
+        }
+        function mousePressed() {//when you press the box you an change the color
+
+            if (mouseX > squareX && mouseY > squareY &&
+                mouseX < squareX + w && mouseY < squareY + h) {
+
+                // toggle the state of button
+                if (button) {
+                    button = false
+                }
+                else {
+                    button = true
+                }
+            }
+        }
+    </script>
+</head>
+
+<body>
+<form><input TYPE="button" onClick="history.go(0)" value="Reset"></form>
+    <div id="code" class="container-fluid">
+        <script src="https://gist-it.appspot.com/github/osvaldog5511/p5js/blob/master/objects-project.html?footer=0"></script>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script>
+        $(window).bind("load", function() {
+            $('#code').before($('#defaultCanvas0').remove());
+        });
+    </script>
+</body>
+
+
+</html>
